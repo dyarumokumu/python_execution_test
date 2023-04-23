@@ -1,0 +1,56 @@
+// For format details, see https://aka.ms/devcontainer.json. For config options, see the
+// README at: https://github.com/devcontainers/templates/tree/main/src/debian
+{
+	// Dev Containerの名称設定 (UI上に表示されるもの)
+	"name": "poetry",
+
+	// // Docker run もしくは Docker compose up の際に使用されるオプション (コマンドライン引数) を指定する．
+	// // docker composeを使用するのであれば基本全てそちらに記述すればよい
+	// "runArgs": ["--gpus", "all"],
+
+	// .devcontainerからの相対パスで設定 (docker composeのcontextが.devcontainerとなっている)
+	"dockerComposeFile": ["../docker-compose.yml", "docker-compose.yml"],
+
+	// Or use a Dockerfile or Docker Compose file. More info: https://containers.dev/guide/dockerfile
+	// "image": "mcr.microsoft.com/devcontainers/base:bullseye".
+
+	// devcontainerでshellなど？で使用するdocker composeのservice名
+	"service": "app",
+	// mcr.microsoft.com/vscode/devcontainers/python:3.9-bullseye
+
+	// 指定したserviceコンテナのworkspaceフォルダ
+	"workspaceFolder": "/workspace",
+
+	// 指定したポートが始めからvscodeのポート機能で手元環境にforwardされるようになる
+	// docker-compose内で設定する場合との違いは？
+	// "forwardPorts": [8080],
+
+	"init": true,
+
+	// https://github.com/microsoft/vscode-dev-containers/tree/v0.245.2/script-library/docs
+	// にあるスクリプトをdevcontainerで実行できるプラグイン機構
+	// 以下の例ではdocker-in-dockerの設定を行ってくれるfeatureを設定してる
+	// "features": {
+	// 	"docker-in-docker": {
+	// 	"version": "latest",
+	// 	"dockerDashComposeVersion": "v2"
+	// 	}
+	// },
+
+	// Configure tool-specific properties.
+	"customizations": {
+		"vscode": {
+			"settings": {},
+			// extentionのページの歯車アイコンをクリックすると出てくる「拡張機能 ID のコピー」というやつからここに貼るIDを知ることができる
+			"extensions": ["oderwat.indent-rainbow",
+						   "shardulm94.trailing-spaces",
+						   "donjayamanne.python-extension-pack",
+						   "eamodio.gitlens",
+						   "donjayamanne.githistory",
+						   "mhutchie.git-graph"],
+		}
+	},
+
+	// Uncomment to connect as root instead. More info: https://aka.ms/dev-containers-non-root.
+	// "remoteUser": "root"
+}
