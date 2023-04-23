@@ -5,7 +5,9 @@ services:
     container_name: app
     build:
       args:
-        - PYTHON_VERSION=3.10
+        - BASE_IMAGE=nvidia/cuda
+        - BASE_IMAGE_TAG=12.0.1-cudnn8-runtime-ubuntu20.04
+        - PYTHON_VERSION=3.9
       context: app
       dockerfile: Dockerfile
       target: run
