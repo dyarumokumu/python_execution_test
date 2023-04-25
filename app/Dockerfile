@@ -28,7 +28,7 @@ ARG POETRY_CACHE_DIR
 WORKDIR /workspace/${APP_NAME}
 COPY pyproject.toml poetry.lock ./
 RUN apt-get update \
-    && apt-get install git
+    && apt-get install -y git
 RUN \
     --mount=type=cache,target=${POETRY_CACHE_DIR} \
     poetry config cache-dir ${POETRY_CACHE_DIR} && \
