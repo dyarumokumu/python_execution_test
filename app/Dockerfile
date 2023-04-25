@@ -1,7 +1,7 @@
 # syntax=docker/dockerfile:1
 ARG APP_NAME="app" # アプリ名
 ARG BASE_IMAGE='pytorch/pytorch' # 大元となるtorch2.0の入ったdocker image名
-ARG BASE_IMAGE_TAG='2.0.0-cuda11.7-cudnn8-devel'
+ARG BASE_IMAGE_TAG='1.12.1-cuda11.3-cudnn8-devel'
 ARG PYTHON_BASE_IMAGE='python' # 実行時のベースイメージ
 ARG POETRY_CACHE_DIR='/root/.cache/poetry' # poetryのキャッシュディレクトリ
 
