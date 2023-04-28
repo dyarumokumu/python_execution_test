@@ -5,7 +5,9 @@ services:
     container_name: app
     build:
       args:
-        - PYTHON_VERSION=3.10
+        - BASE_IMAGE=pytorch/pytorch
+        - BASE_IMAGE_TAG=2.0.0-cuda11.7-cudnn8-devel
+        - PYTHON_VERSION=3.9
       context: app
       dockerfile: Dockerfile
       target: run

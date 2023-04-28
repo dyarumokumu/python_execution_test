@@ -1,10 +1,11 @@
 # syntax=docker/dockerfile:1
 ARG APP_NAME="app" # アプリ名
-ARG PYTHON_VERSION='3.10' # pythonのバージョン
+ARG BASE_IMAGE='pytorch/pytorch' # 大元となるtorch2.0の入ったdocker image名
+ARG BASE_IMAGE_TAG='2.0.0-cuda11.7-cudnn8-devel'
 ARG PYTHON_BASE_IMAGE='python' # 実行時のベースイメージ
 ARG POETRY_CACHE_DIR='/root/.cache/poetry' # poetryのキャッシュディレクトリ
 
-FROM ${PYTHON_BASE_IMAGE}:${PYTHON_VERSION} AS poetry
+FROM ${BASE_IMAGE}:${BASE_IMAGE_TAG} AS poetry
 ENV PYTHONUNBUFFERED=true
 RUN \
     --mount=type=cache,target=/var/lib/apt/lists \
@@ -21,6 +22,8 @@ ARG APP_NAME
 ARG POETRY_CACHE_DIR
 WORKDIR /workspace/${APP_NAME}
 COPY pyproject.toml poetry.lock ./
+RUN apt-get update \
+    && apt-get install -y git
 RUN \
     --mount=type=cache,target=${POETRY_CACHE_DIR} \
     poetry config cache-dir ${POETRY_CACHE_DIR} && \
