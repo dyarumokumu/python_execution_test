@@ -11,3 +11,10 @@ services:
       context: app
       dockerfile: Dockerfile
       target: run
+    deploy:
+      resources:
+        reservations:
+          devices:
+            - driver: nvidia
+              count: 1
+              capabilities: [gpu]
