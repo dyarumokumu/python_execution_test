@@ -13,8 +13,29 @@ transformers = "^4.28.1"
 flask = "^2.2.3"
 ipykernel = "^6.22.0"
 ipywidgets = "^8.0.6"
+black = "^23.3.0"
+mypy = "^1.2.0"
+isort = "^5.12.0"
+pyproject-flake8 = "^6.0.0.post1"
 
 
 [build-system]
 requires = ["poetry-core"]
 build-backend = "poetry.core.masonry.api"
+
+[tools.black]
+line-length = 119
+
+[tools.flake8]
+max-line-length = 119
+
+[tool.mypy]
+ignore_missing_imports = true
+disallow-untyped-defs = true
+disallow-untyped-calls = true
+warn-return-any = true
+no-implicit-optional = true
+
+[tool.isort]
+profile = "black"
+line_length = 119

@@ -3,30 +3,25 @@
 {
 	// Dev Containerの名称設定 (UI上に表示されるもの)
 	"name": "poetry",
-
 	// // Docker run もしくは Docker compose up の際に使用されるオプション (コマンドライン引数) を指定する．
 	// // docker composeを使用するのであれば基本全てそちらに記述すればよい
 	// "runArgs": ["--gpus", "all"],
-
 	// .devcontainerからの相対パスで設定 (docker composeのcontextが.devcontainerとなっている)
-	"dockerComposeFile": ["../docker-compose.yml", "docker-compose.yml"],
-
+	"dockerComposeFile": [
+		"../docker-compose.yml",
+		"docker-compose.yml"
+	],
 	// Or use a Dockerfile or Docker Compose file. More info: https://containers.dev/guide/dockerfile
 	// "image": "mcr.microsoft.com/devcontainers/base:bullseye".
-
 	// devcontainerでshellなど？で使用するdocker composeのservice名
 	"service": "app",
 	// mcr.microsoft.com/vscode/devcontainers/python:3.9-bullseye
-
 	// 指定したserviceコンテナのworkspaceフォルダ
 	"workspaceFolder": "/workspace",
-
 	// 指定したポートが始めからvscodeのポート機能で手元環境にforwardされるようになる
 	// docker-compose内で設定する場合との違いは？
 	// "forwardPorts": [8080],
-
 	"init": true,
-
 	// https://github.com/microsoft/vscode-dev-containers/tree/v0.245.2/script-library/docs
 	// にあるスクリプトをdevcontainerで実行できるプラグイン機構
 	// 以下の例ではdocker-in-dockerの設定を行ってくれるfeatureを設定してる
@@ -36,21 +31,73 @@
 	// 	"dockerDashComposeVersion": "v2"
 	// 	}
 	// },
-
 	// Configure tool-specific properties.
 	"customizations": {
 		"vscode": {
-			"settings": {},
+			"settings": {
+				"files.insertFinalNewline": true,
+				"trailing-spaces.trimOnSave": true,
+				"files.trimTrailingWhitespace": true,
+				"autoDocstring.docstringFormat": "numpy",
+				"[python]": {
+					"editor.defaultFormatter": "ms-python.black-formatter",
+					"editor.formatOnSave": true,
+					"editor.codeActionsOnSave": {
+						"source.organizeImports": true
+					}
+				},
+				"editor.formatOnSave": true,
+				"python.formatting.provider": "black",
+				"python.formatting.blackPath": "/opt/conda/bin/black",
+				"python.defaultInterpreterPath": "/opt/conda/bin/python",
+				"python.linting.flake8Path": "/opt/conda/bin/pflake8",
+				"python.linting.mypyPath": "/opt/conda/bin/mypy",
+				"python.linting.flake8Enabled": true,
+				"python.linting.mypyEnabled": true,
+				"python.linting.flake8CategorySeverity.E": "Warning",
+				"python.linting.flake8CategorySeverity.F": "Warning",
+				"black-formatter.args": [
+					"--config=/workspace/app/pyproject.toml"
+				],
+				"black-formatter.path": [
+					"/opt/conda/bin/black"
+				],
+				"black-formatter.interpreter": [
+					"/opt/conda/bin/python"
+				],
+				"isort.path": [
+					"/opt/conda/bin/isort"
+				],
+				"isort.args": [
+					"--settings-path=/workspace/app/pyproject.toml"
+				],
+				"python.linting.mypyCategorySeverity.error": "Information",
+				"flake8.severity": {
+					"E": "Warning",
+					"F": "Warning",
+					"I": "Warning"
+				},
+				"flake8.path": [
+					"/opt/conda/bin/pflake8"
+				],
+				"flake8.interpreter": [
+					"/opt/conda/bin/python"
+				]
+			},
 			// extentionのページの歯車アイコンをクリックすると出てくる「拡張機能 ID のコピー」というやつからここに貼るIDを知ることができる
-			"extensions": ["oderwat.indent-rainbow",
-						   "shardulm94.trailing-spaces",
-						   "donjayamanne.python-extension-pack",
-						   "eamodio.gitlens",
-						   "donjayamanne.githistory",
-						   "mhutchie.git-graph"],
+			"extensions": [
+				"oderwat.indent-rainbow",
+				"shardulm94.trailing-spaces",
+				"donjayamanne.python-extension-pack",
+				"ms-python.black-formatter",
+				"ms-python.isort",
+				"ms-python.flake8",
+				"eamodio.gitlens",
+				"donjayamanne.githistory",
+				"mhutchie.git-graph"
+			]
 		}
-	},
-
+	}
 	// Uncomment to connect as root instead. More info: https://aka.ms/dev-containers-non-root.
 	// "remoteUser": "root"
 }
